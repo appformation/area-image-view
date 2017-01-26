@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      xmlns:compat="http://schemas.android.com/apk/res-auto" >
+
+    <item android:id="@+id/back"
+          android:icon="@drawable/ic_back"
+          compat:showAsAction="ifRoom"
+          tools:ignore="AppCompatResource"
+          android:visible="false"
+          android:title="back"/>
+
+    <item android:id="@+id/clear"
+          android:icon="@drawable/ic_clear"
+          compat:showAsAction="ifRoom"
+          tools:ignore="AppCompatResource"
+          android:visible="false"
+          android:title="clear" />
+
+    <item android:id="@+id/ok"
+          android:icon="@drawable/ic_ok"
+          compat:showAsAction="ifRoom"
+          tools:ignore="AppCompatResource"
+          android:visible="false"
+          android:title="ok" />
+
+</menu>

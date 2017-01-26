@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:layout_centerVertical="true"
+        android:textColor="@android:color/white"
+        android:drawableBottom="@drawable/image"
+        android:text="SELECT PHOTO FILE \nTO GET VERTICES"/>
+
+    <pl.appformation.areaimageviewsample.PathImageView
+        android:id="@+id/path_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <ImageView
+        android:id="@+id/img_browser"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/image"
+        android:layout_margin="12dp"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"
+        android:contentDescription="@null"/>
+
+</RelativeLayout>

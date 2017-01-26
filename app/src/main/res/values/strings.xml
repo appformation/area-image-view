@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">AreaImageViewSample</string>
+
+    <string name="drawer_open">Open</string>
+    <string name="drawer_closed">Close</string>
+
+    <string name="get_vertices">Get vertices</string>
+    <string name="sample">Sample</string>
+</resources>
