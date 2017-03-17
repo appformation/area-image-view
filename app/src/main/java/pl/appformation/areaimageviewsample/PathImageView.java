@@ -164,8 +164,21 @@ public class PathImageView extends ImageView
 
     public void setBitmap(Bitmap bitmap)
     {
+        if (bitmap == null)
+        {
+            return;
+        }
+
         float width = bitmap.getWidth() * getResources().getDisplayMetrics().density;
         float height = bitmap.getHeight() * getResources().getDisplayMetrics().density;
-        setImageBitmap(Bitmap.createScaledBitmap(bitmap, (int) width, (int) height, true));
+
+        try
+        {
+            setImageBitmap(Bitmap.createScaledBitmap(bitmap, (int) width, (int) height, true));
+        }
+        catch (OutOfMemoryError er)
+        {
+            er.printStackTrace();
+        }
     }
 }

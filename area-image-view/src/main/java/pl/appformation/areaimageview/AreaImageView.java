@@ -32,72 +32,80 @@ public class AreaImageView extends ImageView
         @Override
         public boolean onTouch(View view, MotionEvent event)
         {
-            float imgX, imgY;
-
-            float eventX = event.getX();
-            float eventY = event.getY();
-            float[] eventXY = new float[] {eventX, eventY};
-
-            Matrix invertMatrix = new Matrix();
-            ((ImageView)view).getImageMatrix().invert(invertMatrix);
-
-            invertMatrix.mapPoints(eventXY);
-            int x = (int) eventXY[0];
-            int y = (int) eventXY[1];
-
-            BitmapDrawable bitmapDrawable = (BitmapDrawable) getDrawable();
-            if (bitmapDrawable == null)
+            switch (event.getAction())
             {
-                return false;
-            }
-
-            Bitmap bitmap = bitmapDrawable.getBitmap();
-
-            if(x < 0)
-            {
-                x = 0;
-            }
-            else if(x > bitmap.getWidth()-1)
-            {
-                x = bitmap.getWidth()-1;
-            }
-
-            if(y < 0)
-            {
-                y = 0;
-            }
-            else if(y > bitmap.getHeight()-1)
-            {
-                y = bitmap.getHeight()-1;
-            }
-
-            imgX = (x) / getResources().getDisplayMetrics().density;
-            imgY = (y) / getResources().getDisplayMetrics().density;
-
-            Point point = new Point(imgX, imgY);
-
-            Log.d(TAG, "Clicked position on image: " + imgX + "  " + imgY);
-
-            for (AreaClickListener listener : mAreaClickListeners)
-            {
-                for (MultiVertexArea multiArea: mMultiVertexAreas)
+                case MotionEvent.ACTION_UP :
                 {
-                    if (multiArea.insideArea(point))
-                    {
-                        listener.OnAreaClick(multiArea.getTag());
-                    }
-                }
+                    float imgX, imgY;
 
-                for (CircleArea circleArea : mCircleAreas)
-                {
-                    if (circleArea.insideArea(point))
+                    float eventX = event.getX();
+                    float eventY = event.getY();
+                    float[] eventXY = new float[] {eventX, eventY};
+
+                    Matrix invertMatrix = new Matrix();
+                    ((ImageView)view).getImageMatrix().invert(invertMatrix);
+
+                    invertMatrix.mapPoints(eventXY);
+                    int x = (int) eventXY[0];
+                    int y = (int) eventXY[1];
+
+                    BitmapDrawable bitmapDrawable = (BitmapDrawable) getDrawable();
+                    if (bitmapDrawable == null)
                     {
-                        listener.OnAreaClick(circleArea.getTag());
+                        return false;
                     }
+
+                    Bitmap bitmap = bitmapDrawable.getBitmap();
+
+                    if(x < 0)
+                    {
+                        x = 0;
+                    }
+                    else if(x > bitmap.getWidth()-1)
+                    {
+                        x = bitmap.getWidth()-1;
+                    }
+
+                    if(y < 0)
+                    {
+                        y = 0;
+                    }
+                    else if(y > bitmap.getHeight()-1)
+                    {
+                        y = bitmap.getHeight()-1;
+                    }
+
+                    imgX = (x) / getResources().getDisplayMetrics().density;
+                    imgY = (y) / getResources().getDisplayMetrics().density;
+
+                    Point point = new Point(imgX, imgY);
+
+                    Log.d(TAG, "Clicked position: " + imgX + "  " + imgY);
+
+                    for (AreaClickListener listener : mAreaClickListeners)
+                    {
+                        for (MultiVertexArea multiArea: mMultiVertexAreas)
+                        {
+                            if (multiArea.insideArea(point))
+                            {
+                                listener.OnAreaClick(multiArea.getTag());
+                            }
+                        }
+
+                        for (CircleArea circleArea : mCircleAreas)
+                        {
+                            if (circleArea.insideArea(point))
+                            {
+                                listener.OnAreaClick(circleArea.getTag());
+                            }
+                        }
+                    }
+
+                    return false;
                 }
             }
 
-            return false;
+            return true;
         }
     };
 
