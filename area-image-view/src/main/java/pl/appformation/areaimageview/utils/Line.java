@@ -43,8 +43,7 @@ class Line
     /**
      * Indicate whereas the point lays on the line.
      *
-     * @param point
-     *            - The point to check
+     * @param point - The point to check
      * @return <code>True</code> if the point lays on the line, otherwise return <code>False</code>
      */
     boolean isInside(Point point)
@@ -78,7 +77,6 @@ class Line
     {
         return mA;
     }
-
 
     float getB()
     {

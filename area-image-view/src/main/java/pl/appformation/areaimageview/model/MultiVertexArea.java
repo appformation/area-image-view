@@ -47,7 +47,6 @@ public class MultiVertexArea extends ClickableArea
         }
     }
 
-
     public boolean insideArea(Point point)
     {
         return mPolygon.contains(point);

@@ -11,13 +11,14 @@ import android.view.View;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import pl.appformation.areaimageview.listeners.AreaClickListener;
 import pl.appformation.areaimageview.model.CircleArea;
 import pl.appformation.areaimageview.model.MultiVertexArea;
 import pl.appformation.areaimageview.utils.Point;
 
-
+@SuppressWarnings("unused")
 public class AreaImageView extends ImageView
 {
     private static final String TAG = AreaImageView.class.getSimpleName();
@@ -141,6 +142,11 @@ public class AreaImageView extends ImageView
     public void addCircleClickableArea(Point circleCenter, int radius, Object tag)
     {
         mCircleAreas.add(new CircleArea(circleCenter, radius, tag));
+    }
+
+    public void addPolygon(Object tag, Point... points)
+    {
+        addMultiVertexClickableArea(new ArrayList<>(Arrays.asList(points)), tag);
     }
 
     public void addMultiVertexClickableArea(ArrayList<Point> vertices, Object tag)

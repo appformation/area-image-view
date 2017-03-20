@@ -57,8 +57,7 @@ public class Polygon
          * Add vertex points of the polygon.<br>
          * It is very important to add the vertexes by order, like you were drawing them one by one.
          *
-         * @param point
-         *            The vertex point
+         * @param point- The vertex point
          * @return The builder
          */
         public Builder addVertex(Point point)
@@ -85,14 +84,12 @@ public class Polygon
 
         /**
          * Close the polygon shape. This will create a new side (edge) from the <b>last</b> vertex point to the <b>first</b> vertex point.
-         *
          * @return The builder
          */
         public Builder close()
         {
             validate();
 
-            // add last Line
             mSides.add(new Line(mVertexes.get(mVertexes.size() - 1), mVertexes.get(0)));
             mIsClosed = true;
 
@@ -108,10 +105,8 @@ public class Polygon
         {
             validate();
 
-            // in case you forgot to close
             if (!mIsClosed)
             {
-                // add last Line
                 mSides.add(new Line(mVertexes.get(mVertexes.size() - 1), mVertexes.get(0)));
             }
 
@@ -120,9 +115,7 @@ public class Polygon
 
         /**
          * Update bounding box with a new point.<br>
-         *
-         * @param point
-         *            New point
+         * @param point- New point
          */
         private void updateBoundingBox(Point point)
         {
@@ -138,7 +131,6 @@ public class Polygon
             }
             else
             {
-                // set bounding box
                 if (point.x > mBoundingBox.xMax)
                 {
                     mBoundingBox.xMax = point.x;
@@ -170,8 +162,7 @@ public class Polygon
     /**
      * Check if the the given point is inside of the polygon.<br>
      *
-     * @param point
-     *            The point to check
+     * @param point- The point to check
      * @return <code>True</code> if the point is inside the polygon, otherwise return <code>False</code>
      */
     public boolean contains(Point point)
@@ -184,14 +175,10 @@ public class Polygon
             {
                 if (intersect(ray, side))
                 {
-                    // System.out.println("intersection++");
                     intersection++;
                 }
             }
 
-			/*
-			 * If the number of intersections is odd, then the point is inside the polygon
-			 */
             if (intersection % 2 == 1)
             {
                 return true;
@@ -209,17 +196,15 @@ public class Polygon
     {
         Point intersectPoint;
 
-        // if both vectors aren't from the kind of x=1 lines then go into
         if (!ray.isVertical() && !side.isVertical())
         {
-            // check if both vectors are parallel. If they are parallel then no intersection point will exist
             if (ray.getA() - side.getA() == 0)
             {
                 return false;
             }
 
-            float x = ((side.getB() - ray.getB()) / (ray.getA() - side.getA())); // x = (b2-b1)/(a1-a2)
-            float y = side.getA() * x + side.getB(); // y = a2*x+b2
+            float x = ((side.getB() - ray.getB()) / (ray.getA() - side.getA()));
+            float y = side.getA() * x + side.getB();
             intersectPoint = new Point(x, y);
         }
         else if (ray.isVertical() && !side.isVertical())
@@ -239,9 +224,6 @@ public class Polygon
             return false;
         }
 
-        // System.out.println("Ray: " + ray.toString() + " ,Side: " + side);
-        // System.out.println("Intersect point: " + intersectPoint.toString());
-
         return side.isInside(intersectPoint) && ray.isInside(intersectPoint);
     }
 
@@ -251,7 +233,6 @@ public class Polygon
      */
     private Line createRay(Point point)
     {
-        // create outside point
         float epsilon = (mBoundingBox.xMax - mBoundingBox.xMin) / 100f;
         Point outsidePoint = new Point(mBoundingBox.xMin - epsilon, mBoundingBox.yMin);
 

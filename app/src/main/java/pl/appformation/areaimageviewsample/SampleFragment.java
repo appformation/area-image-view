@@ -42,6 +42,11 @@ public class SampleFragment extends Fragment
 
     private void assignClickableArea()
     {
+        if (getView() == null)
+        {
+            return;
+        }
+
         mAreaImage = (AreaImageView) getView().findViewById(R.id.area_image);
 
         ArrayList<Point> pOne = new ArrayList<>();
